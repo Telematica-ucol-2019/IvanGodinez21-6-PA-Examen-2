@@ -1,5 +1,4 @@
 ﻿using Banking6796.Models6796;
-//using GalaSoft.MvvmLight.Command;
 using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
@@ -13,8 +12,9 @@ using Xamarin.Forms;
 
 namespace Banking6796.ViewModels6796
 {
-    internal class RegisterViewModel6796 : BaseViewModel6796
+    public class RegisterViewModel6796 : BaseViewModel6796
     {
+
         #region Attributes
         private string name;
         private string fLastName;
@@ -122,15 +122,25 @@ namespace Banking6796.ViewModels6796
                 }
             }
         }
-        private void checkValidations()
+        async private void checkValidations()
         {
             if (inpName?.Length > 0 && inpFLastName?.Length > 0 && inpMLastName?.Length > 0 && inpPhone?.Length > 0)
             {
-                Application.Current.MainPage.DisplayAlert("Done", "Registred correctly", "Ok");
+                User6796 user = new User6796()
+                { 
+                    Id = Guid.NewGuid().ToString(),
+                    Name = inpName,
+                    FLastName = inpFLastName,
+                    MLastName = inpMLastName,
+                    Phone = inpPhone,
+                    Accounts = new ObservableCollection<Account6796>()
+                };
+                await Application.Current.MainPage.DisplayAlert("Done", "Registred correctly", "Ok");
+                Application.Current.MainPage = new NavigationPage(new Views6796.MainPage6796(user));
             }
             else
             {
-                Application.Current.MainPage.DisplayAlert("Missing information", "Please fill all the form", "Ok");
+                await Application.Current.MainPage.DisplayAlert("Missing information", "Please fill all the form", "Ok");
             }
         }
         #endregion

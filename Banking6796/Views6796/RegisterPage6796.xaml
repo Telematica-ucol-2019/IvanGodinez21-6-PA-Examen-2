@@ -14,87 +14,81 @@
                 <RowDefinition Height="80"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <ScrollView Grid.Row="0" BackgroundColor="RoyalBlue" Orientation="Horizontal">
-                <StackLayout VerticalOptions="Center" HorizontalOptions="Center" Orientation="Horizontal">
-                    <Label FontSize="25" FontAttributes="Bold" HorizontalTextAlignment="Center">
+            <Grid Grid.Row="0" BackgroundColor="RoyalBlue">
+                <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                    <Label FontSize="25" FontAttributes="Bold">
                         <Label.FormattedText>
                             <FormattedString>
-                                <Span Text="Register to log in" TextColor="White"/>
+                                <Span Text="Fill the form to proceed" TextColor="White"/>
                             </FormattedString>
                         </Label.FormattedText>
                     </Label>
                 </StackLayout>
-            </ScrollView>
-            <ScrollView Grid.Row="1" BackgroundColor="#e6e8fd">
-                <Grid VerticalOptions="Start">
-                    <Frame BackgroundColor="#e6e8fd">
-                        <StackLayout>
-                            <Image Source="https://icons.veryicon.com/png/o/miscellaneous/two-color-icon-library/user-286.png"/>
-                            <Entry
-                                x:Name="inpName"
-                                BackgroundColor="White"
-                                Text="{Binding inpName, Mode=TwoWay}"
-                                Placeholder="Name"
-                            >
-                                <Entry.Behaviors>
-                                    <xct:EventToCommandBehavior
-                                        EventName="TextChanged"
-                                        Command="{Binding cmdInpNameValidate}"
-                                    />
-                                </Entry.Behaviors>
-                            </Entry>
-
-                            <Entry
-                                x:Name="inpFLastName"
-                                BackgroundColor="White"
-                                Text="{Binding inpFLastName, Mode=TwoWay}"
-                                Placeholder="Father last name"
-                            >
-                                <Entry.Behaviors>
-                                    <xct:EventToCommandBehavior
-                                        EventName="TextChanged"
-                                        Command="{Binding cmdInpFLastNameValidate}"
-                                    />
-                                </Entry.Behaviors>
-                            </Entry>
-                            <Entry
-                                x:Name="inpMLastName"
-                                BackgroundColor="White"
-                                Text="{Binding inpMLastName, Mode=TwoWay}"
-                                Placeholder="Mother last name"
-                            >
-                                <Entry.Behaviors>
-                                    <xct:EventToCommandBehavior
-                                        EventName="TextChanged"
-                                        Command="{Binding cmdInpMLastNameValidate}"
-                                    />
-                                </Entry.Behaviors>
-                            </Entry>
-                            <Entry
-                                x:Name="inpPhone"
-                                BackgroundColor="White"
-                                Text="{Binding inpPhone, Mode=TwoWay}"
-                                Placeholder="Phone"
-                                Keyboard="Telephone"
-                            >
-                                <Entry.Behaviors>
-                                    <xct:EventToCommandBehavior
-                                        EventName="TextChanged"
-                                        Command="{Binding cmdInpPhone}"
-                                    />
-                                </Entry.Behaviors>
-                            </Entry>
-                            <Button
-                                Text="Register"
-                                BackgroundColor="RoyalBlue"
-                                TextColor="White"
-                                CornerRadius="10"
-                                Command="{Binding cmdBtnRegister}"
-                            />
-                        </StackLayout>
-                    </Frame>
-                </Grid>
-            </ScrollView>
+            </Grid>
+            <Grid Grid.Row="1" BackgroundColor="#e6e8fd">
+                <StackLayout Margin="10" VerticalOptions="StartAndExpand">
+                    <Image Source="https://icons.veryicon.com/png/o/miscellaneous/two-color-icon-library/user-286.png" WidthRequest="165" HeightRequest="165"/>
+                    <Entry
+                        x:Name="inpName"
+                        BackgroundColor="White"
+                        PlaceholderColor="LightGray"
+                        TextColor="Gray"
+                        Text="{Binding inpName, Mode=TwoWay}"
+                        Placeholder="Name">
+                        <Entry.Behaviors>
+                            <xct:EventToCommandBehavior
+                                EventName="TextChanged"
+                                Command="{Binding cmdInpNameValidate}"/>
+                        </Entry.Behaviors>
+                    </Entry>
+                    <Entry
+                        x:Name="inpFLastName"
+                        BackgroundColor="White"
+                        PlaceholderColor="LightGray"
+                        TextColor="Gray"
+                        Text="{Binding inpFLastName, Mode=TwoWay}"
+                        Placeholder="Father last name">
+                        <Entry.Behaviors>
+                            <xct:EventToCommandBehavior
+                                EventName="TextChanged"
+                                Command="{Binding cmdInpFLastNameValidate}"/>
+                        </Entry.Behaviors>
+                    </Entry>
+                    <Entry
+                        x:Name="inpMLastName"
+                        BackgroundColor="White"
+                        PlaceholderColor="LightGray"
+                        TextColor="Gray"
+                        Text="{Binding inpMLastName, Mode=TwoWay}"
+                        Placeholder="Mother last name">
+                        <Entry.Behaviors>
+                            <xct:EventToCommandBehavior
+                                EventName="TextChanged"
+                                Command="{Binding cmdInpMLastNameValidate}"/>
+                        </Entry.Behaviors>
+                    </Entry>
+                    <Entry
+                        x:Name="inpPhone"
+                        BackgroundColor="White"
+                        PlaceholderColor="LightGray"
+                        TextColor="Gray"
+                        Text="{Binding inpPhone, Mode=TwoWay}"
+                        Placeholder="Phone"
+                        Keyboard="Telephone">
+                        <Entry.Behaviors>
+                            <xct:EventToCommandBehavior
+                                EventName="TextChanged"
+                                Command="{Binding cmdInpPhone}"/>
+                        </Entry.Behaviors>
+                    </Entry>
+                    <Button
+                        Text="Register"
+                        BackgroundColor="RoyalBlue"
+                        TextColor="White"
+                        CornerRadius="10"
+                        Command="{Binding cmdBtnRegister}"/>
+                </StackLayout>
+            </Grid>
         </Grid>
     </ContentPage.Content>
 </ContentPage>
