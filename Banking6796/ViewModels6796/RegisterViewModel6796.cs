@@ -1,5 +1,6 @@
 ﻿using Banking6796.Models6796;
-using GalaSoft.MvvmLight.Command;
+//using GalaSoft.MvvmLight.Command;
+using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -43,6 +44,26 @@ namespace Banking6796.ViewModels6796
         }
         #endregion
         #region Commads
+        public ICommand cmdInpNameValidate
+        {
+            get { return new RelayCommand(inpNameValidate); }
+            set { }
+        }
+        public ICommand cmdInpFLastNameValidate
+        {
+            get { return new RelayCommand(inpFLastNameValidate); }
+            set { }
+        }
+        public ICommand cmdInpMLastNameValidate
+        {
+            get { return new RelayCommand(inpMLastNameValidate); }
+            set { }
+        }
+        public ICommand cmdInpPhone
+        {
+            get { return new RelayCommand(inpPhoneValidate); }
+            set { }
+        }
         public ICommand cmdBtnRegister
         {
             get { return new RelayCommand(checkValidations); }
@@ -50,18 +71,62 @@ namespace Banking6796.ViewModels6796
         }
         #endregion
         #region Methods
+        private void inpNameValidate()
+        {
+            if (inpName.Length > 0)
+            {
+                string lastCharacter = inpName[inpName.Length - 1].ToString();
+                if (!Regex.IsMatch(lastCharacter, @"^[a-zA-Z]+$"))
+                {
+                    inpName = inpName.Substring(0, inpName.Length - 1);
+                }
+            }
+        }
+        private void inpFLastNameValidate()
+        {
+            if (inpFLastName.Length > 0)
+            {
+                string lastCharacter = inpFLastName[inpFLastName.Length - 1].ToString();
+                if (!Regex.IsMatch(lastCharacter, @"^[a-zA-Z]+$"))
+                {
+                    inpFLastName = inpFLastName.Substring(0, inpFLastName.Length - 1);
+                }
+            }
+        }
+        private void inpMLastNameValidate()
+        {
+            if (inpMLastName.Length > 0)
+            {
+                string lastCharacter = inpMLastName[inpMLastName.Length - 1].ToString();
+                if (!Regex.IsMatch(lastCharacter, @"^[a-zA-Z]+$"))
+                {
+                    inpMLastName = inpMLastName.Substring(0, inpMLastName.Length - 1);
+                }
+            }
+        }
+        private void inpPhoneValidate()
+        {
+            if (inpPhone.Length > 0)
+            {
+                if (inpPhone.Length <= 10)
+                {
+                    string lastCharacter = inpPhone[inpPhone.Length - 1].ToString();
+                    if (!Regex.IsMatch(lastCharacter, @"^[0-9]*$"))
+                    {
+                        inpPhone = inpPhone.Substring(0, inpPhone.Length - 1);
+                    }
+                }
+                else
+                {
+                    inpPhone = inpPhone.Substring(0, 10);
+                }
+            }
+        }
         private void checkValidations()
         {
             if (inpName?.Length > 0 && inpFLastName?.Length > 0 && inpMLastName?.Length > 0 && inpPhone?.Length > 0)
             {
-                if (Regex.IsMatch(inpName, @"^[a-zA-Z]+$"))
-                {
-                    Console.WriteLine("Yea");
-                }
-                else
-                {
-                    Console.WriteLine("Yea");
-                }
+                Application.Current.MainPage.DisplayAlert("Done", "Registred correctly", "Ok");
             }
             else
             {

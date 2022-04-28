@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:model="clr-namespace:Banking6796.Models6796"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              xmlns:vm="clr-namespace:Banking6796.ViewModels6796"
              x:Name="thisMainPage"
              x:DataType="vm:RegisterViewModel6796"
@@ -34,28 +35,55 @@
                                 BackgroundColor="White"
                                 Text="{Binding inpName, Mode=TwoWay}"
                                 Placeholder="Name"
-                                TextChanged="{Binding cmdInpName}"
-                                
-                            />
+                            >
+                                <Entry.Behaviors>
+                                    <xct:EventToCommandBehavior
+                                        EventName="TextChanged"
+                                        Command="{Binding cmdInpNameValidate}"
+                                    />
+                                </Entry.Behaviors>
+                            </Entry>
+
                             <Entry
                                 x:Name="inpFLastName"
                                 BackgroundColor="White"
                                 Text="{Binding inpFLastName, Mode=TwoWay}"
                                 Placeholder="Father last name"
-                            />
+                            >
+                                <Entry.Behaviors>
+                                    <xct:EventToCommandBehavior
+                                        EventName="TextChanged"
+                                        Command="{Binding cmdInpFLastNameValidate}"
+                                    />
+                                </Entry.Behaviors>
+                            </Entry>
                             <Entry
                                 x:Name="inpMLastName"
                                 BackgroundColor="White"
                                 Text="{Binding inpMLastName, Mode=TwoWay}"
                                 Placeholder="Mother last name"
-                            />
+                            >
+                                <Entry.Behaviors>
+                                    <xct:EventToCommandBehavior
+                                        EventName="TextChanged"
+                                        Command="{Binding cmdInpMLastNameValidate}"
+                                    />
+                                </Entry.Behaviors>
+                            </Entry>
                             <Entry
                                 x:Name="inpPhone"
                                 BackgroundColor="White"
                                 Text="{Binding inpPhone, Mode=TwoWay}"
                                 Placeholder="Phone"
                                 Keyboard="Telephone"
-                            />
+                            >
+                                <Entry.Behaviors>
+                                    <xct:EventToCommandBehavior
+                                        EventName="TextChanged"
+                                        Command="{Binding cmdInpPhone}"
+                                    />
+                                </Entry.Behaviors>
+                            </Entry>
                             <Button
                                 Text="Register"
                                 BackgroundColor="RoyalBlue"
