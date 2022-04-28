@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:model="clr-namespace:Banking6796.Models6796"
+             xmlns:vm="clr-namespace:Banking6796.ViewModels6796"
+             x:Name="thisMainPage"
+             x:DataType="vm:RegisterViewModel6796"
+             x:Class="Banking6796.Views6796.RegisterPage6796"
+             Title="Registration">
+    <ContentPage.Content>
+        <Grid BackgroundColor="AliceBlue" RowSpacing="0" ColumnSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <ScrollView Grid.Row="0" BackgroundColor="RoyalBlue" Orientation="Horizontal">
+                <StackLayout VerticalOptions="Center" HorizontalOptions="Center" Orientation="Horizontal">
+                    <Label FontSize="25" FontAttributes="Bold" HorizontalTextAlignment="Center">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Register to log in" TextColor="White"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </StackLayout>
+            </ScrollView>
+            <ScrollView Grid.Row="1" BackgroundColor="#e6e8fd">
+                <Grid VerticalOptions="Start">
+                    <Frame BackgroundColor="#e6e8fd">
+                        <StackLayout>
+                            <Image Source="https://icons.veryicon.com/png/o/miscellaneous/two-color-icon-library/user-286.png"/>
+                            <Entry
+                                x:Name="inpName"
+                                BackgroundColor="White"
+                                Text="{Binding inpName, Mode=TwoWay}"
+                                Placeholder="Name"
+                                TextChanged="{Binding cmdInpName}"
+                                
+                            />
+                            <Entry
+                                x:Name="inpFLastName"
+                                BackgroundColor="White"
+                                Text="{Binding inpFLastName, Mode=TwoWay}"
+                                Placeholder="Father last name"
+                            />
+                            <Entry
+                                x:Name="inpMLastName"
+                                BackgroundColor="White"
+                                Text="{Binding inpMLastName, Mode=TwoWay}"
+                                Placeholder="Mother last name"
+                            />
+                            <Entry
+                                x:Name="inpPhone"
+                                BackgroundColor="White"
+                                Text="{Binding inpPhone, Mode=TwoWay}"
+                                Placeholder="Phone"
+                                Keyboard="Telephone"
+                            />
+                            <Button
+                                Text="Register"
+                                BackgroundColor="RoyalBlue"
+                                TextColor="White"
+                                CornerRadius="10"
+                                Command="{Binding cmdBtnRegister}"
+                            />
+                        </StackLayout>
+                    </Frame>
+                </Grid>
+            </ScrollView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

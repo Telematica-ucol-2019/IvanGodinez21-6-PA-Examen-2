@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:model="clr-namespace:Banking6796.Models6796"
+             xmlns:vm="clr-namespace:Banking6796.ViewModels6796"
+             x:Name="thisMainPage"
+             x:DataType="vm:MainPageViewModel6796"
+             x:Class="Banking6796.Views6796.MainPage6796"
+             Title="Menu">
+    <ContentPage.Content>
+        <Grid BackgroundColor="AliceBlue" RowSpacing="0" ColumnSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="60"/>
+            </Grid.RowDefinitions>
+            <ScrollView Grid.Row="0" BackgroundColor="RoyalBlue" Orientation="Horizontal">
+                <StackLayout VerticalOptions="Center" HorizontalOptions="Center" Orientation="Horizontal">
+                    <Label FontSize="25" FontAttributes="Bold" HorizontalTextAlignment="Center">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Welcome " TextColor="White"/>
+                                <Span Text="User" TextColor="#63d1b4"/>
+                                <Span Text="!" TextColor="White"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </StackLayout>
+            </ScrollView>
+            <ScrollView Grid.Row="1" BackgroundColor="#e6e8fd">
+                <Grid VerticalOptions="Start">
+                    <Frame BackgroundColor="#ebf0ff">
+                        <Label FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Center">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="Balance: "/>
+                                    <Span Text="$" TextColor="#63d1b4"/>
+                                    <Span Text="0" TextColor="#63d1b4"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                    </Frame>
+                </Grid>
+            </ScrollView>
+            <ScrollView Grid.Row="2" BackgroundColor="RoyalBlue">
+                <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Orientation="Horizontal">
+                    <Button Text="➕" BackgroundColor="GhostWhite" FontSize="Large" CornerRadius="10"></Button>
+                    <Button Text="📤" BackgroundColor="GhostWhite" FontSize="Large" CornerRadius="10"></Button>
+                </StackLayout>
+            </ScrollView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
