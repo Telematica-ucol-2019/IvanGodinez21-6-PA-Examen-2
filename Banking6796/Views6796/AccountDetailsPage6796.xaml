@@ -1,7 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Banking6796.Views6796.AccountDetailsPage6796">
+             xmlns:model="clr-namespace:Banking6796.Models6796"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:vm="clr-namespace:Banking6796.ViewModels6796"
+             x:Name="thisAccountDetails"
+             x:DataType="vm:MainViewModel6796"
+             x:Class="Banking6796.Views6796.AccountDetailsPage6796"
+             Title="Account details">
     <ContentPage.Content>
         <Grid BackgroundColor="AliceBlue" RowSpacing="0" ColumnSpacing="0">
             <Grid.RowDefinitions>
@@ -14,19 +20,121 @@
                     <Label FontSize="25" FontAttributes="Bold" HorizontalTextAlignment="Center">
                         <Label.FormattedText>
                             <FormattedString>
-                                <Span Text="Welcome " TextColor="White"/>
-                                <Span Text="{Binding Name}" TextColor="#63d1b4"/>
-                                <Span Text="!" TextColor="White"/>
+                                <Span Text="Viewing " TextColor="White"/>
+                                <Span Text="{Binding Account.Name}" TextColor="#63d1b4"/>
+                                <Span Text=" account" TextColor="White"/>
                             </FormattedString>
                         </Label.FormattedText>
                     </Label>
                 </StackLayout>
             </Grid>
             <ScrollView Grid.Row="1" BackgroundColor="#e6e8fd">
-                
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="120"/>
+                    </Grid.RowDefinitions>
+                    <Image Grid.Row="0" Grid.Column="0" Source="https://cdn1.iconfinder.com/data/icons/cash-card-add-on/48/v-22-512.png" HeightRequest="120" WidthRequest="120"/>
+                    <StackLayout Grid.Row="1" Margin="10">
+                        <Label TextColor="DimGray">Name</Label>
+                        <Frame>
+                            <Label Text="{Binding Account.Name}" TextColor="DimGray"></Label>
+                        </Frame>
+                        <Label TextColor="DimGray">Number</Label>
+                        <Frame>
+                            <Label Text="{Binding Account.Number}" TextColor="DimGray"></Label>
+                        </Frame>
+                        <Label TextColor="DimGray">Balance</Label>
+                        <Frame>
+                            <Label>
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="$" TextColor="#63d1b4"/>
+                                        <Span Text="{Binding Account.Balance}" TextColor="#63d1b4"/>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                        </Frame>
+                        <Label TextColor="DimGray">Transactions</Label>
+                        <Frame>
+                            <CollectionView ItemsSource="{Binding BindingContext.Account.Transactions, Source={x:Reference thisAccountDetails}}">
+                                <CollectionView.ItemsLayout>
+                                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="model:Transaction6796">
+                                        <Frame BackgroundColor="GhostWhite">
+                                            <StackLayout>
+                                                <Label>
+                                                    <Label.FormattedText>
+                                                        <FormattedString>
+                                                            <Span Text="Id: " TextColor="DimGray"/>
+                                                            <Span Text="{Binding Id}" TextColor="RoyalBlue"/>
+                                                        </FormattedString>
+                                                    </Label.FormattedText>
+                                                </Label>
+                                                <Label>
+                                                    <Label.FormattedText>
+                                                        <FormattedString>
+                                                            <Span Text="Value: " TextColor="DimGray"/>
+                                                            <Span Text="$" TextColor="#63d1b4"/>
+                                                            <Span Text="{Binding Value}" TextColor="#63d1b4"/>
+                                                        </FormattedString>
+                                                    </Label.FormattedText>
+                                                </Label>
+                                                <Label>
+                                                    <Label.FormattedText>
+                                                        <FormattedString>
+                                                            <Span Text="Type: " TextColor="DimGray"/>
+                                                            <Span Text="{Binding Type}" TextColor="RoyalBlue"/>
+                                                        </FormattedString>
+                                                    </Label.FormattedText>
+                                                </Label>
+                                                <Label>
+                                                    <Label.FormattedText>
+                                                        <FormattedString>
+                                                            <Span Text="Date: " TextColor="DimGray"/>
+                                                            <Span Text="{Binding Date}" TextColor="RoyalBlue"/>
+                                                        </FormattedString>
+                                                    </Label.FormattedText>
+                                                </Label>
+                                                <Label>
+                                                    <Label.FormattedText>
+                                                        <FormattedString>
+                                                            <Span Text="Hour: " TextColor="DimGray"/>
+                                                            <Span Text="{Binding Hour}" TextColor="RoyalBlue"/>
+                                                        </FormattedString>
+                                                    </Label.FormattedText>
+                                                </Label>
+                                            </StackLayout>
+                                        </Frame>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </Frame>
+                    </StackLayout>
+                </Grid>
             </ScrollView>
             <Grid Grid.Row="2" BackgroundColor="RoyalBlue">
-                
+                <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Orientation="Horizontal">
+                    <Button 
+                        Text="🧾"
+                        BackgroundColor="GhostWhite"
+                        FontSize="Large"
+                        CornerRadius="10"
+                        Command="{Binding cmdBtnCreateAccount}"/>
+                    <Button 
+                        Text="✏️"
+                        BackgroundColor="GhostWhite"
+                        FontSize="Large"
+                        CornerRadius="10"
+                        Command="{Binding cmdBtnCreateAccount}"/>
+                    <Button 
+                        Text="🗑️"
+                        BackgroundColor="GhostWhite"
+                        FontSize="Large"
+                        CornerRadius="10"
+                        Command="{Binding cmdBtnCreateAccount}"/>
+                </StackLayout>
             </Grid>
         </Grid>
     </ContentPage.Content>

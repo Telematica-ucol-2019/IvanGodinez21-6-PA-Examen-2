@@ -1,4 +1,5 @@
-﻿using Banking6796.ViewModels6796;
+﻿using Banking6796.Models6796;
+using Banking6796.ViewModels6796;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,9 +14,10 @@ namespace Banking6796.Views6796
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AccountDetailsPage6796 : ContentPage
     {
-        public AccountDetailsPage6796(MainViewModel6796  vm)
+        public AccountDetailsPage6796(Account6796 account, MainViewModel6796 vm)
         {
             InitializeComponent();
+            vm.Account = account;
             BindingContext = vm;
         }
     }

@@ -21,7 +21,7 @@
                         <Label.FormattedText>
                             <FormattedString>
                                 <Span Text="Welcome " TextColor="White"/>
-                                <Span Text="{Binding Name}" TextColor="#63d1b4"/>
+                                <Span Text="{Binding User.Name}" TextColor="#63d1b4"/>
                                 <Span Text="!" TextColor="White"/>
                             </FormattedString>
                         </Label.FormattedText>
@@ -30,7 +30,7 @@
             </Grid>
             <ScrollView Grid.Row="1" BackgroundColor="#e6e8fd">
                 <StackLayout>
-                    <CollectionView ItemsSource="{Binding BindingContext.Accounts, Source={x:Reference thisMainPage}}">
+                    <CollectionView ItemsSource="{Binding BindingContext.User.Accounts, Source={x:Reference thisMainPage}}">
                         <CollectionView.ItemsLayout>
                             <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
                         </CollectionView.ItemsLayout>

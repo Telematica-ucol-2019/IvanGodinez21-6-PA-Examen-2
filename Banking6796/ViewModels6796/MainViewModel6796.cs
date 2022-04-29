@@ -16,28 +16,19 @@ namespace Banking6796.ViewModels6796
     {
         #region Main
         #region Attributes
-        private string name;
-        private string fLastName;
-        private string mLastName;
-        private string phone;
-        private ObservableCollection<Account6796> accounts;
+        private User6796 user;
         #endregion
         #region Properties
-        public ObservableCollection<Account6796> Accounts
+        public User6796 User
         {
-            get { return this.accounts; }
-            set { SetValue(ref this.accounts, value); OnPropertyChanged(); }
-        }
-        public string Name
-        {
-            get { return this.name; }
-            set { SetValue(ref this.name, value); OnPropertyChanged(); }
+            get { return this.user; }
+            set { this.user = value; OnPropertyChanged(); }
         }
         #endregion
         #region Commads
         public ICommand cmdTapAccount
         {
-            get { return new RelayCommand(navigateToAccountDetails); }
+            get { return new RelayCommand<Account6796>(navigateToAccountDetails); }
             set { }
         }
         public ICommand cmdBtnCreateAccount
@@ -52,9 +43,9 @@ namespace Banking6796.ViewModels6796
         }
         #endregion
         #region Methods
-        async private void navigateToAccountDetails()
+        async private void navigateToAccountDetails(Account6796 _account)
         {
-            await Application.Current.MainPage.Navigation.PushAsync(new Views6796.AccountDetailsPage6796(this));
+            await Application.Current.MainPage.Navigation.PushAsync(new Views6796.AccountDetailsPage6796(_account, this));
         }
         async private void navigateToCreateAccountPage()
         {
@@ -68,13 +59,9 @@ namespace Banking6796.ViewModels6796
         }
         #endregion
         #region Constructor
-        public MainViewModel6796(User6796 user)
+        public MainViewModel6796(User6796 userPassed)
         {
-            name = user.Name;
-            fLastName = user.FLastName;
-            mLastName = user.MLastName;
-            phone = user.Phone;
-            accounts = user.Accounts;
+            user = userPassed;
         }
         #endregion
         #endregion
@@ -88,6 +75,7 @@ namespace Banking6796.ViewModels6796
             get { return this.accountName; }
             set { this.accountName = value; OnPropertyChanged(); }
         }
+        public Account6796 Account { get; set; }
         #endregion
         #region Commads
         public ICommand cmdInpNameValidate
@@ -115,7 +103,7 @@ namespace Banking6796.ViewModels6796
         }
         async private void createAccount()
         {
-            accounts.Add(
+            User.Accounts.Add(
                 new Account6796()
                 {
                     Id = Guid.NewGuid().ToString(),

@@ -8,7 +8,8 @@ namespace Banking6796.Models6796
     public class Transaction6796
     {
         public string Id { get; set; }
-        public string Currency { get; set; }
+        public int Value { get; set; }
+        public string Type { get; set; }
         public string Date { get; set; }
         public string Hour { get; set; }
     }

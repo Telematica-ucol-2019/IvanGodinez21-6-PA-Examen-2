@@ -150,6 +150,32 @@ namespace Banking6796.ViewModels6796
                             Balance = 101,
                             Number = 100000000,
                             Transactions = new ObservableCollection<Transaction6796>()
+                            {
+                                new Transaction6796()
+                                {
+                                    Id = Guid.NewGuid().ToString(),
+                                    Value = 1,
+                                    Type = "Withdraw",
+                                    Date = "28/04/2022",
+                                    Hour = "12:00",
+                                },
+                                new Transaction6796()
+                                {
+                                    Id = Guid.NewGuid().ToString(),
+                                    Value = 10,
+                                    Type = "Deposit",
+                                    Date = "28/04/2022",
+                                    Hour = "12:02",
+                                },
+                                new Transaction6796()
+                                {
+                                    Id = Guid.NewGuid().ToString(),
+                                    Value = 10,
+                                    Type = "Deposit",
+                                    Date = "28/04/2022",
+                                    Hour = "12:11",
+                                }
+                            }
                         }
                     }
                 };
