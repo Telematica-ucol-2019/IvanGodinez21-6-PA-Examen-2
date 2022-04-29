@@ -36,15 +36,15 @@
                     <Image Grid.Row="0" Grid.Column="0" Source="https://cdn1.iconfinder.com/data/icons/cash-card-add-on/48/v-22-512.png" HeightRequest="120" WidthRequest="120"/>
                     <StackLayout Grid.Row="1" Margin="10">
                         <Label TextColor="DimGray">Name</Label>
-                        <Frame>
+                        <Frame BackgroundColor="White">
                             <Label Text="{Binding Account.Name}" TextColor="DimGray"></Label>
                         </Frame>
                         <Label TextColor="DimGray">Number</Label>
-                        <Frame>
+                        <Frame BackgroundColor="White">
                             <Label Text="{Binding Account.Number}" TextColor="DimGray"></Label>
                         </Frame>
                         <Label TextColor="DimGray">Balance</Label>
-                        <Frame>
+                        <Frame BackgroundColor="White">
                             <Label>
                                 <Label.FormattedText>
                                     <FormattedString>
@@ -55,7 +55,7 @@
                             </Label>
                         </Frame>
                         <Label TextColor="DimGray">Transactions</Label>
-                        <Frame>
+                        <Frame BackgroundColor="White">
                             <CollectionView ItemsSource="{Binding BindingContext.Account.Transactions, Source={x:Reference thisAccountDetails}}">
                                 <CollectionView.ItemsLayout>
                                     <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
@@ -117,23 +117,26 @@
             <Grid Grid.Row="2" BackgroundColor="RoyalBlue">
                 <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Orientation="Horizontal">
                     <Button 
-                        Text="🧾"
+                        Text="💰⏫"
                         BackgroundColor="GhostWhite"
                         FontSize="Large"
                         CornerRadius="10"
-                        Command="{Binding cmdBtnCreateAccount}"/>
+                        Command="{Binding cmdBtnDeposit}"
+                        CommandParameter="{Binding Account}"/>
                     <Button 
-                        Text="✏️"
+                        Text="💰⏬"
                         BackgroundColor="GhostWhite"
                         FontSize="Large"
                         CornerRadius="10"
-                        Command="{Binding cmdBtnCreateAccount}"/>
+                        Command="{Binding cmdBtnWithdraw}"
+                        CommandParameter="{Binding Account}"/>
                     <Button 
                         Text="🗑️"
                         BackgroundColor="GhostWhite"
                         FontSize="Large"
                         CornerRadius="10"
-                        Command="{Binding cmdBtnCreateAccount}"/>
+                        Command="{Binding cmdBtnDeleteAccount}"
+                        CommandParameter="{Binding Account}"/>
                 </StackLayout>
             </Grid>
         </Grid>

@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:model="clr-namespace:Banking6796.Models6796"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:vm="clr-namespace:Banking6796.ViewModels6796"
+             x:Name="thisUserDetails"
+             x:DataType="vm:MainViewModel6796"
+             x:Class="Banking6796.Views6796.UserDetailsPage6796"
+             Title="User details">
+    <ContentPage.Content>
+        <Grid BackgroundColor="AliceBlue" RowSpacing="0" ColumnSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" BackgroundColor="RoyalBlue">
+                <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                    <Label FontSize="25" FontAttributes="Bold">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Fill the form to proceed" TextColor="White"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </StackLayout>
+            </Grid>
+            <Grid Grid.Row="1" BackgroundColor="#e6e8fd">
+                <StackLayout Margin="10" VerticalOptions="StartAndExpand">
+                    <Image Source="https://icons.veryicon.com/png/o/miscellaneous/two-color-icon-library/user-286.png" WidthRequest="165" HeightRequest="165"/>
+                    <Entry
+                        x:Name="inpName"
+                        BackgroundColor="White"
+                        PlaceholderColor="LightGray"
+                        TextColor="Gray"
+                        Text="{Binding inpUserDetailsName, Mode=TwoWay}"
+                        Placeholder="Name">
+                        <Entry.Behaviors>
+                            <xct:EventToCommandBehavior
+                                EventName="TextChanged"
+                                Command="{Binding cmdInpUserDetailsNameValidate}"/>
+                        </Entry.Behaviors>
+                    </Entry>
+                    <Entry
+                        x:Name="inpFLastName"
+                        BackgroundColor="White"
+                        PlaceholderColor="LightGray"
+                        TextColor="Gray"
+                        Text="{Binding inpUserDetailsFLastName, Mode=TwoWay}"
+                        Placeholder="Father last name">
+                        <Entry.Behaviors>
+                            <xct:EventToCommandBehavior
+                                EventName="TextChanged"
+                                Command="{Binding cmdInpUserDetailsFLastNameValidate}"/>
+                        </Entry.Behaviors>
+                    </Entry>
+                    <Entry
+                        x:Name="inpMLastName"
+                        BackgroundColor="White"
+                        PlaceholderColor="LightGray"
+                        TextColor="Gray"
+                        Text="{Binding cmdInpUserDetailsMLastNameValidate, Mode=TwoWay}"
+                        Placeholder="Mother last name">
+                        <Entry.Behaviors>
+                            <xct:EventToCommandBehavior
+                                EventName="TextChanged"
+                                Command="{Binding cmdInpUserDetailsMLastNameValidate}"/>
+                        </Entry.Behaviors>
+                    </Entry>
+                    <Entry
+                        x:Name="inpPhone"
+                        BackgroundColor="White"
+                        PlaceholderColor="LightGray"
+                        TextColor="Gray"
+                        Text="{Binding inpUserDetailsPhone, Mode=TwoWay}"
+                        Placeholder="Phone"
+                        Keyboard="Telephone">
+                        <Entry.Behaviors>
+                            <xct:EventToCommandBehavior
+                                EventName="TextChanged"
+                                Command="{Binding cmdInpUserDetailsPhoneValidate}"/>
+                        </Entry.Behaviors>
+                    </Entry>
+                    <Button
+                        Text="Register"
+                        BackgroundColor="RoyalBlue"
+                        TextColor="White"
+                        CornerRadius="10"
+                        Command="{Binding cmdBtnUserDetailsRegister}"/>
+                </StackLayout>
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

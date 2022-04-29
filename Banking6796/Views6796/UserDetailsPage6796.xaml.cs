@@ -11,12 +11,12 @@ using Xamarin.Forms.Xaml;
 namespace Banking6796.Views6796
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class AccountDetailsPage6796 : ContentPage
+    public partial class UserDetailsPage6796 : ContentPage
     {
-        public AccountDetailsPage6796(Account6796 account, MainViewModel6796 vm)
+        public UserDetailsPage6796(User6796 user, MainViewModel6796 vm)
         {
             InitializeComponent();
-            vm.Account = account;
+            vm.User = user;
             BindingContext = vm;
         }
     }

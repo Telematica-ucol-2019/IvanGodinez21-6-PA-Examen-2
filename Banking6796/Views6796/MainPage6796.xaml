@@ -78,18 +78,18 @@
             </ScrollView>
             <Grid Grid.Row="2" BackgroundColor="RoyalBlue">
                 <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Orientation="Horizontal">
-                    <Button 
+                    <Button
                         Text="➕"
                         BackgroundColor="GhostWhite"
                         FontSize="Large"
                         CornerRadius="10"
                         Command="{Binding cmdBtnCreateAccount}"/>
-                    <Button 
-                        Text="📤"
+                    <Button
+                        Text="👤"
                         BackgroundColor="GhostWhite"
                         FontSize="Large"
                         CornerRadius="10"
-                        Command="{Binding cmdBtnTransfer}"/>
+                        Command="{Binding cmdBtnEditAccount}"/>
                 </StackLayout>
             </Grid>
         </Grid>

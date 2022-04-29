@@ -139,7 +139,7 @@ namespace Banking6796.ViewModels6796
                         {
                             Id = Guid.NewGuid().ToString(),
                             Name = "TEST",
-                            Balance = 100,
+                            Balance = 0,
                             Number = 100000000,
                             Transactions = new ObservableCollection<Transaction6796>()
                         },

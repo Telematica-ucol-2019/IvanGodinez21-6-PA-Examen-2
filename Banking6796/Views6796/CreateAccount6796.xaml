@@ -38,7 +38,7 @@
                         <Entry.Behaviors>
                             <xct:EventToCommandBehavior
                                 EventName="TextChanged"
-                                Command="{Binding cmdInpNameValidate}"/>
+                                Command="{Binding cmdInpAccountNameValidate}"/>
                         </Entry.Behaviors>
                     </Entry>
                     <Button
