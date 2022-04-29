@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Banking6796.Views6796.AccountDetailsPage6796">
+    <ContentPage.Content>
+        <Grid BackgroundColor="AliceBlue" RowSpacing="0" ColumnSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="60"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" BackgroundColor="RoyalBlue">
+                <StackLayout VerticalOptions="Center" HorizontalOptions="Center" Orientation="Horizontal">
+                    <Label FontSize="25" FontAttributes="Bold" HorizontalTextAlignment="Center">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Welcome " TextColor="White"/>
+                                <Span Text="{Binding Name}" TextColor="#63d1b4"/>
+                                <Span Text="!" TextColor="White"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </StackLayout>
+            </Grid>
+            <ScrollView Grid.Row="1" BackgroundColor="#e6e8fd">
+                
+            </ScrollView>
+            <Grid Grid.Row="2" BackgroundColor="RoyalBlue">
+                
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

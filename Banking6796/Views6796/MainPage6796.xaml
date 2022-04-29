@@ -5,7 +5,7 @@
              xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              xmlns:vm="clr-namespace:Banking6796.ViewModels6796"
              x:Name="thisMainPage"
-             x:DataType="vm:MainPageViewModel6796"
+             x:DataType="vm:MainViewModel6796"
              x:Class="Banking6796.Views6796.MainPage6796"
              Title="Menu">
     <ContentPage.Content>
@@ -21,7 +21,7 @@
                         <Label.FormattedText>
                             <FormattedString>
                                 <Span Text="Welcome " TextColor="White"/>
-                                <Span Text="{Binding lblName}" TextColor="#63d1b4"/>
+                                <Span Text="{Binding Name}" TextColor="#63d1b4"/>
                                 <Span Text="!" TextColor="White"/>
                             </FormattedString>
                         </Label.FormattedText>
@@ -29,24 +29,67 @@
                 </StackLayout>
             </Grid>
             <ScrollView Grid.Row="1" BackgroundColor="#e6e8fd">
-                <StackLayout VerticalOptions="Start">
-                    <Frame BackgroundColor="#ebf0ff">
-                        <Label FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Center">
-                            <Label.FormattedText>
-                                <FormattedString>
-                                    <Span Text="Balance: " TextColor="DimGray"/>
-                                    <Span Text="$" TextColor="#63d1b4"/>
-                                    <Span Text="0" TextColor="#63d1b4"/>
-                                </FormattedString>
-                            </Label.FormattedText>
-                        </Label>
-                    </Frame>
+                <StackLayout>
+                    <CollectionView ItemsSource="{Binding BindingContext.Accounts, Source={x:Reference thisMainPage}}">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="model:Account6796">
+                                <Frame BackgroundColor="#ebf0ff">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="80"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="80"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Image Grid.Row="0" Grid.Column="0" Source="https://cdn1.iconfinder.com/data/icons/cash-card-add-on/48/v-22-512.png" HeightRequest="80" WidthRequest="80"/>
+                                        <Label Grid.Row="0" Grid.Column="1" VerticalOptions="Center" HorizontalOptions="Start">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="Account: " TextColor="DimGray"/>
+                                                    <Span Text="{Binding Name}" TextColor="RoyalBlue"/>
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                        <Label Grid.Row="0" Grid.Column="2" VerticalOptions="Center" HorizontalOptions="End">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="Balance: " TextColor="DimGray"/>
+                                                    <Span Text="$" TextColor="#63d1b4"/>
+                                                    <Span Text="{Binding Balance}" TextColor="#63d1b4"/>
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                    </Grid>
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer 
+                                            Command="{Binding BindingContext.cmdTapAccount, Source={x:Reference thisMainPage}}"
+                                            CommandParameter="{Binding .}"/>
+                                    </Frame.GestureRecognizers>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
                 </StackLayout>
             </ScrollView>
             <Grid Grid.Row="2" BackgroundColor="RoyalBlue">
                 <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Orientation="Horizontal">
-                    <Button Text="➕" BackgroundColor="GhostWhite" FontSize="Large" CornerRadius="10"></Button>
-                    <Button Text="📤" BackgroundColor="GhostWhite" FontSize="Large" CornerRadius="10"></Button>
+                    <Button 
+                        Text="➕"
+                        BackgroundColor="GhostWhite"
+                        FontSize="Large"
+                        CornerRadius="10"
+                        Command="{Binding cmdBtnCreateAccount}"/>
+                    <Button 
+                        Text="📤"
+                        BackgroundColor="GhostWhite"
+                        FontSize="Large"
+                        CornerRadius="10"
+                        Command="{Binding cmdBtnTransfer}"/>
                 </StackLayout>
             </Grid>
         </Grid>

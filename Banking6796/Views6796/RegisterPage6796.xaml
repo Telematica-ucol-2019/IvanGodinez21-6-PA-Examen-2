@@ -4,7 +4,7 @@
              xmlns:model="clr-namespace:Banking6796.Models6796"
              xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              xmlns:vm="clr-namespace:Banking6796.ViewModels6796"
-             x:Name="thisMainPage"
+             x:Name="thisRegisterPage"
              x:DataType="vm:RegisterViewModel6796"
              x:Class="Banking6796.Views6796.RegisterPage6796"
              Title="Registration">

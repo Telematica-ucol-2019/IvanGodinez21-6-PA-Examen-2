@@ -127,13 +127,31 @@ namespace Banking6796.ViewModels6796
             if (inpName?.Length > 0 && inpFLastName?.Length > 0 && inpMLastName?.Length > 0 && inpPhone?.Length > 0)
             {
                 User6796 user = new User6796()
-                { 
+                {
                     Id = Guid.NewGuid().ToString(),
                     Name = inpName,
                     FLastName = inpFLastName,
                     MLastName = inpMLastName,
                     Phone = inpPhone,
                     Accounts = new ObservableCollection<Account6796>()
+                    {
+                        new Account6796()
+                        {
+                            Id = Guid.NewGuid().ToString(),
+                            Name = "TEST",
+                            Balance = 100,
+                            Number = 100000000,
+                            Transactions = new ObservableCollection<Transaction6796>()
+                        },
+                        new Account6796()
+                        {
+                            Id = Guid.NewGuid().ToString(),
+                            Name = "TEST",
+                            Balance = 101,
+                            Number = 100000000,
+                            Transactions = new ObservableCollection<Transaction6796>()
+                        }
+                    }
                 };
                 await Application.Current.MainPage.DisplayAlert("Done", "Registred correctly", "Ok");
                 Application.Current.MainPage = new NavigationPage(new Views6796.MainPage6796(user));

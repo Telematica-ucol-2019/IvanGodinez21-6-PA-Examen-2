@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:model="clr-namespace:Banking6796.Models6796"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:vm="clr-namespace:Banking6796.ViewModels6796"
+             x:Name="thisCreateAccountPage"
+             x:DataType="vm:MainViewModel6796"
+             x:Class="Banking6796.Views6796.CreateAccount6796"
+             Title="Create account">
+    <ContentPage.Content>
+        <Grid BackgroundColor="AliceBlue" RowSpacing="0" ColumnSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" BackgroundColor="RoyalBlue">
+                <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                    <Label FontSize="25" FontAttributes="Bold">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Fill the form to proceed" TextColor="White"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </StackLayout>
+            </Grid>
+            <Grid Grid.Row="1" BackgroundColor="#e6e8fd">
+                <StackLayout Margin="10" VerticalOptions="StartAndExpand">
+                    <Image Source="https://cdn1.iconfinder.com/data/icons/cash-card-add-on/48/v-22-512.png" WidthRequest="165" HeightRequest="165"/>
+                    <Entry
+                        x:Name="inpName"
+                        BackgroundColor="White"
+                        PlaceholderColor="LightGray"
+                        TextColor="Gray"
+                        Text="{Binding inpAccountName, Mode=TwoWay}"
+                        Placeholder="Account name">
+                        <Entry.Behaviors>
+                            <xct:EventToCommandBehavior
+                                EventName="TextChanged"
+                                Command="{Binding cmdInpNameValidate}"/>
+                        </Entry.Behaviors>
+                    </Entry>
+                    <Button
+                        Text="Create"
+                        BackgroundColor="RoyalBlue"
+                        TextColor="White"
+                        CornerRadius="10"
+                        Command="{Binding cmdBtnCreate}"/>
+                </StackLayout>
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
