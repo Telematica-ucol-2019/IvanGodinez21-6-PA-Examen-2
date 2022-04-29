@@ -16,7 +16,6 @@ namespace Banking6796.Views6796
         public UserDetailsPage6796(User6796 user, MainViewModel6796 vm)
         {
             InitializeComponent();
-            vm.User = user;
             BindingContext = vm;
         }
     }

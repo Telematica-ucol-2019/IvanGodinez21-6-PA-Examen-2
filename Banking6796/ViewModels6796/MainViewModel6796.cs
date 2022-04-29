@@ -185,7 +185,7 @@ namespace Banking6796.ViewModels6796
         }
         public string inpUserDetailsMLastName
         {
-            get { return this.User.Name; }
+            get { return this.User.MLastName; }
             set { this.User.MLastName = value; OnPropertyChanged(); }
         }
         public string inpUserDetailsPhone
@@ -197,50 +197,94 @@ namespace Banking6796.ViewModels6796
         #region Commands
         public ICommand cmdInpUserDetailsNameValidate
         {
-            get { return new RelayCommand<User6796>(inpUserDetailsNameValidate); }
+            get { return new RelayCommand(inpUserDetailsNameValidate); }
             set { }
         }
         public ICommand cmdInpUserDetailsFLastNameValidate
         {
-            get { return new RelayCommand<User6796>(inpUserDetailsFLastNameValidate); }
+            get { return new RelayCommand(inpUserDetailsFLastNameValidate); }
             set { }
         }
         public ICommand cmdInpUserDetailsMLastNameValidate
         {
-            get { return new RelayCommand<User6796>(inpUserDetailsMLastNameValidate); }
+            get { return new RelayCommand(inpUserDetailsMLastNameValidate); }
             set { }
         }
         public ICommand cmdInpUserDetailsPhoneValidate
         {
-            get { return new RelayCommand<User6796>(inpUserDetailsPhoneValidate); }
+            get { return new RelayCommand(inpUserDetailsPhoneValidate); }
             set { }
         }
-        public ICommand cmdBtnUserDetailsRegister
+        public ICommand cmdBtnUserDetailsEdit
         {
-            get { return new RelayCommand<User6796>(btnUserDetailsRegister); }
+            get { return new RelayCommand<User6796>(btnUserDetailsEdit); }
             set { }
         }
         #endregion
         #region Methods
-        async private void inpUserDetailsNameValidate(User6796 user6796)
+        private void inpUserDetailsNameValidate()
         {
-            Console.WriteLine();
+            if (inpUserDetailsName.Length > 0)
+            {
+                string lastCharacter = inpUserDetailsName[inpUserDetailsName.Length - 1].ToString();
+                if (!Regex.IsMatch(lastCharacter, @"^[a-zA-Z ]+$"))
+                {
+                    inpUserDetailsName = inpUserDetailsName.Substring(0, inpUserDetailsName.Length - 1);
+                }
+            }
         }
-        async private void inpUserDetailsFLastNameValidate(User6796 user6796)
+        private void inpUserDetailsFLastNameValidate()
         {
-            Console.WriteLine();
+            if (inpUserDetailsFLastName.Length > 0)
+            {
+                string lastCharacter = inpUserDetailsFLastName[inpUserDetailsFLastName.Length - 1].ToString();
+                if (!Regex.IsMatch(lastCharacter, @"^[a-zA-Z ]+$"))
+                {
+                    inpUserDetailsFLastName = inpUserDetailsFLastName.Substring(0, inpUserDetailsFLastName.Length - 1);
+                }
+            }
         }
-        async private void inpUserDetailsMLastNameValidate(User6796 user6796)
+        private void inpUserDetailsMLastNameValidate()
         {
-            Console.WriteLine();
+            if (inpUserDetailsMLastName.Length > 0)
+            {
+                string lastCharacter = inpUserDetailsMLastName[inpUserDetailsMLastName.Length - 1].ToString();
+                if (!Regex.IsMatch(lastCharacter, @"^[a-zA-Z ]+$"))
+                {
+                    inpUserDetailsMLastName = inpUserDetailsMLastName.Substring(0, inpUserDetailsMLastName.Length - 1);
+                }
+            }
         }
-        async private void inpUserDetailsPhoneValidate(User6796 user6796)
+        private void inpUserDetailsPhoneValidate()
         {
-            Console.WriteLine();
+            if (inpUserDetailsPhone.Length > 0)
+            {
+                if (inpUserDetailsPhone.Length <= 10)
+                {
+                    string lastCharacter = inpUserDetailsPhone[inpUserDetailsPhone.Length - 1].ToString();
+                    if (!Regex.IsMatch(lastCharacter, @"^[0-9]*$"))
+                    {
+                        inpUserDetailsPhone = inpUserDetailsPhone.Substring(0, inpUserDetailsPhone.Length - 1);
+                    }
+                }
+                else
+                {
+                    inpUserDetailsPhone = inpUserDetailsPhone.Substring(0, 10);
+                }
+            }
         }
-        async private void btnUserDetailsRegister(User6796 user6796)
+        async private void btnUserDetailsEdit(User6796 user6796)
         {
-            Console.WriteLine("Hop");
+            if (inpUserDetailsName?.Length > 0 && inpUserDetailsFLastName?.Length > 0 && inpUserDetailsMLastName?.Length > 0 && inpUserDetailsPhone?.Length > 0)
+            {
+                User = user;
+                await Application.Current.MainPage.DisplayAlert("Done", "Modified correctly", "Ok");
+                await Application.Current.MainPage.Navigation.PopAsync();
+            } 
+            else
+            {
+                await Application.Current.MainPage.DisplayAlert("Missing information", "Please fill all the form", "Ok");
+            }
         }
         #endregion
         #region Constructor

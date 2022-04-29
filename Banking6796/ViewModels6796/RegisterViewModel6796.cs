@@ -76,7 +76,7 @@ namespace Banking6796.ViewModels6796
             if (inpName.Length > 0)
             {
                 string lastCharacter = inpName[inpName.Length - 1].ToString();
-                if (!Regex.IsMatch(lastCharacter, @"^[a-zA-Z]+$"))
+                if (!Regex.IsMatch(lastCharacter, @"^[a-zA-Z ]+$"))
                 {
                     inpName = inpName.Substring(0, inpName.Length - 1);
                 }
@@ -87,7 +87,7 @@ namespace Banking6796.ViewModels6796
             if (inpFLastName.Length > 0)
             {
                 string lastCharacter = inpFLastName[inpFLastName.Length - 1].ToString();
-                if (!Regex.IsMatch(lastCharacter, @"^[a-zA-Z]+$"))
+                if (!Regex.IsMatch(lastCharacter, @"^[a-zA-Z ]+$"))
                 {
                     inpFLastName = inpFLastName.Substring(0, inpFLastName.Length - 1);
                 }
@@ -98,7 +98,7 @@ namespace Banking6796.ViewModels6796
             if (inpMLastName.Length > 0)
             {
                 string lastCharacter = inpMLastName[inpMLastName.Length - 1].ToString();
-                if (!Regex.IsMatch(lastCharacter, @"^[a-zA-Z]+$"))
+                if (!Regex.IsMatch(lastCharacter, @"^[a-zA-Z ]+$"))
                 {
                     inpMLastName = inpMLastName.Substring(0, inpMLastName.Length - 1);
                 }
