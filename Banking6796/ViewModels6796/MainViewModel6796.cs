@@ -99,7 +99,7 @@ namespace Banking6796.ViewModels6796
             if (inpAccountName?.Length > 0)
             {
                 string lastCharacter = inpAccountName[inpAccountName.Length - 1].ToString();
-                if (!Regex.IsMatch(lastCharacter, @"^[a-zA-Z]+$"))
+                if (!Regex.IsMatch(lastCharacter, @"^[a-zA-Z0-9 ]+$"))
                 {
                     inpAccountName = inpAccountName.Substring(0, inpAccountName.Length - 1);
                 }
