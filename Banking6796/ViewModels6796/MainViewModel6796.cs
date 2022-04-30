@@ -96,7 +96,7 @@ namespace Banking6796.ViewModels6796
         #region Methods
         private void inpNameValidate()
         {
-            if (inpAccountName.Length > 0)
+            if (inpAccountName?.Length > 0)
             {
                 string lastCharacter = inpAccountName[inpAccountName.Length - 1].ToString();
                 if (!Regex.IsMatch(lastCharacter, @"^[a-zA-Z]+$"))
@@ -107,17 +107,34 @@ namespace Banking6796.ViewModels6796
         }
         async private void createAccount()
         {
-            User.Accounts.Add(
-                new Account6796()
+            if (inpAccountName?.Length > 0)
+            {
+                long LongRandom(long min, long max, Random rand)
                 {
-                    Id = Guid.NewGuid().ToString(),
-                    Name = inpAccountName,
-                    Number = new Random().Next(1000, 4000),
-                    Balance = new Random().Next(0, 100),
-                    Transactions = new ObservableCollection<Transaction6796>()
+                    byte[] buf = new byte[8];
+                    rand.NextBytes(buf);
+                    long longRand = BitConverter.ToInt64(buf, 0);
+
+                    return (Math.Abs(longRand % (max - min)) + min);
                 }
-              );
-            await Application.Current.MainPage.Navigation.PopAsync();
+                long cardNumber = LongRandom(5400000000000000, 5500000000000000, new Random());
+                User.Accounts.Add(
+                    new Account6796()
+                    {
+                        Id = Guid.NewGuid().ToString(),
+                        Name = inpAccountName,
+                        Number = cardNumber,
+                        Balance = new Random().Next(1, 100),
+                        Transactions = new ObservableCollection<Transaction6796>()
+                    }
+                  );
+                inpAccountName = "";
+                await Application.Current.MainPage.Navigation.PopAsync();
+            }
+            else
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", "You must have to give a name", "Ok");
+            }
         }
         #endregion
         #region Constructor
@@ -129,14 +146,9 @@ namespace Banking6796.ViewModels6796
         #region Properties
         #endregion
         #region Commands
-        public ICommand cmdBtnDeposit
+        public ICommand cmdBtnTransaction
         {
-            get { return new RelayCommand<Account6796>(depositBalance); }
-            set { }
-        }
-        public ICommand cmdBtnWithdraw
-        {
-            get { return new RelayCommand<Account6796>(withdrawBalance); }
+            get { return new RelayCommand<Account6796>(makeTransaction); }
             set { }
         }
         public ICommand cmdBtnDeleteAccount
@@ -146,13 +158,9 @@ namespace Banking6796.ViewModels6796
         }
         #endregion
         #region Methods
-        async private void depositBalance(Account6796 _account)
+        async private void makeTransaction(Account6796 _account)
         {
-            await Application.Current.MainPage.Navigation.PopAsync();
-        }
-        async private void withdrawBalance(Account6796 _account)
-        {
-            await Application.Current.MainPage.Navigation.PopAsync();
+            await Application.Current.MainPage.Navigation.PushAsync(new Views6796.TransactionPage6796(Account, this));
         }
         async private void deleteAccount(Account6796 _account)
         {
@@ -160,7 +168,8 @@ namespace Banking6796.ViewModels6796
             {
                 User.Accounts.Remove(_account);
                 await Application.Current.MainPage.Navigation.PopAsync();
-            } else
+            }
+            else
             {
                 await Application.Current.MainPage.DisplayAlert("Balance detected", "You can't delete an account with balance", "Ok");
             }
@@ -169,7 +178,7 @@ namespace Banking6796.ViewModels6796
         #region Constructor
         #endregion
         #endregion
-        #region EditAccount
+        #region EditUser
         #region Attributes
         #endregion
         #region Properties
@@ -277,13 +286,153 @@ namespace Banking6796.ViewModels6796
         {
             if (inpUserDetailsName?.Length > 0 && inpUserDetailsFLastName?.Length > 0 && inpUserDetailsMLastName?.Length > 0 && inpUserDetailsPhone?.Length > 0)
             {
-                User = user;
-                await Application.Current.MainPage.DisplayAlert("Done", "Modified correctly", "Ok");
-                await Application.Current.MainPage.Navigation.PopAsync();
-            } 
+                if (inpUserDetailsPhone.Length > 8)
+                {
+                    User = user;
+                    inpUserDetailsName = User.Name;
+                    inpUserDetailsFLastName = User.FLastName;
+                    inpUserDetailsMLastName = User.MLastName;
+                    inpUserDetailsPhone = User.Phone;
+                    await Application.Current.MainPage.DisplayAlert("Done", "Modified correctly", "Ok");
+                    await Application.Current.MainPage.Navigation.PopAsync();
+                }
+                else
+                {
+                    await Application.Current.MainPage.DisplayAlert("Error", "The phone must have between 8-10 digits", "Ok");
+                }
+            }
             else
             {
                 await Application.Current.MainPage.DisplayAlert("Missing information", "Please fill all the form", "Ok");
+            }
+        }
+        #endregion
+        #region Constructor
+        #endregion
+        #endregion
+        #region Transaction
+        #region Attributes
+        private string amount;
+        private string action;
+        #endregion
+        #region Properties
+        public string inpTransactionAmount
+        {
+            get { return amount; }
+            set { amount = value; OnPropertyChanged(); }
+        }
+        public string pckTransactionAction
+        {
+            get { return action; }
+            set { action = value; OnPropertyChanged(); }
+        }
+        #endregion
+        #region Commands
+        public ICommand cmdInpTransactionAmountValidate
+        {
+            get { return new RelayCommand(transactionAmountValidate); }
+            set { }
+        }
+        public ICommand cmdPckTransactionActionValidate
+        {
+            get { return new RelayCommand(transactionActionValidate); }
+            set { }
+        }
+        public ICommand cmdBtnTransactionContinue
+        {
+            get { return new RelayCommand<Account6796>(transactionContinue); }
+            set { }
+        }
+        #endregion
+        #region Methods
+        private void transactionAmountValidate()
+        {
+            if (amount.Length > 0)
+            {
+                if (amount.Length <= 10)
+                {
+                    string lastCharacter = amount[amount.Length - 1].ToString();
+                    if (!Regex.IsMatch(lastCharacter, @"^[0-9]*$"))
+                    {
+                        amount = amount.Substring(0, amount.Length - 1);
+                    }
+                }
+                else
+                {
+                    amount = amount.Substring(0, 10);
+                    inpTransactionAmount = amount.Substring(0, 10);
+                }
+            }
+        }
+        private void transactionActionValidate()
+        {
+            Console.WriteLine(action);
+            Console.WriteLine("OP2");
+        }
+        async private void transactionContinue(Account6796 _account)
+        {
+            if (action?.Length > 0 && amount?.Length > 0)
+            {
+                if (Convert.ToBoolean(Convert.ToInt32(action)) == false)
+                {
+                    if (Convert.ToInt32(amount) > 0)
+                    {
+                        int withDraw = Account.Balance - Convert.ToInt32(amount);
+                        if (withDraw >= 0)
+                        {
+                            Account.Balance = withDraw;
+                            Account.Transactions.Add(
+                                new Transaction6796()
+                                {
+                                    Id = Guid.NewGuid().ToString(),
+                                    Value = Convert.ToInt32(amount),
+                                    Type = Convert.ToInt32(action) == 0 ? "Withdraw" : "Deposit",
+                                    Date = DateTime.Today.ToString("d"),
+                                    Hour = DateTime.Now.ToString("HH:mm")
+                                }
+                            );
+                            inpTransactionAmount = "";
+                            await Application.Current.MainPage.DisplayAlert("Done", "Transaction complete", "Ok");
+                            await Application.Current.MainPage.Navigation.PopToRootAsync();
+                        }
+                        else
+                        {
+                            await Application.Current.MainPage.DisplayAlert("Error", $"Account balance is ${Account.Balance}, you can't withdraw ${amount}", "Ok");
+                        }
+                    }
+                    else
+                    {
+                        await Application.Current.MainPage.DisplayAlert("Error", $"You can't withdraw ${amount}", "Ok");
+                    }
+                }
+                else
+                {
+                    if (Convert.ToInt32(amount) > 0)
+                    {
+                        Account.Balance += Convert.ToInt32(amount);
+                        Account.Transactions.Add(
+                            new Transaction6796()
+                            {
+                                Id = Guid.NewGuid().ToString(),
+                                Value = Convert.ToInt32(amount),
+                                Type = Convert.ToInt32(action) == 0 ? "Withdraw" : "Deposit",
+                                Date = DateTime.Today.ToString("d"),
+                                Hour = DateTime.Now.ToString("HH:mm")
+                            }
+                        );
+                        inpTransactionAmount = "";
+                        await Application.Current.MainPage.DisplayAlert("Done", "Transaction complete", "Ok");
+                        await Application.Current.MainPage.Navigation.PopToRootAsync();
+                    }
+                    else
+                    {
+                        await Application.Current.MainPage.DisplayAlert("Error", $"You can't deposit ${amount}", "Ok");
+                    }
+                }
+            }
+            else
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", "Please specify an amount and an action", "Ok");
             }
         }
         #endregion

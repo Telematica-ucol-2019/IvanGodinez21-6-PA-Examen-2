@@ -126,43 +126,37 @@ namespace Banking6796.ViewModels6796
         {
             if (inpName?.Length > 0 && inpFLastName?.Length > 0 && inpMLastName?.Length > 0 && inpPhone?.Length > 0)
             {
-                User6796 user = new User6796()
+                if (inpPhone.Length > 8)
                 {
-                    Id = Guid.NewGuid().ToString(),
-                    Name = inpName,
-                    FLastName = inpFLastName,
-                    MLastName = inpMLastName,
-                    Phone = inpPhone,
-                    Accounts = new ObservableCollection<Account6796>()
+                    User6796 user = new User6796()
+                    {
+                        Id = Guid.NewGuid().ToString(),
+                        Name = inpName,
+                        FLastName = inpFLastName,
+                        MLastName = inpMLastName,
+                        Phone = inpPhone,
+                        Accounts = new ObservableCollection<Account6796>()
                     {
                         new Account6796()
                         {
                             Id = Guid.NewGuid().ToString(),
-                            Name = "TEST",
-                            Balance = 0,
-                            Number = 100000000,
-                            Transactions = new ObservableCollection<Transaction6796>()
-                        },
-                        new Account6796()
-                        {
-                            Id = Guid.NewGuid().ToString(),
-                            Name = "TEST",
-                            Balance = 101,
-                            Number = 100000000,
+                            Name = "Test",
+                            Balance = 100,
+                            Number = 5400000000000000,
                             Transactions = new ObservableCollection<Transaction6796>()
                             {
                                 new Transaction6796()
                                 {
                                     Id = Guid.NewGuid().ToString(),
-                                    Value = 1,
-                                    Type = "Withdraw",
+                                    Value = 51,
+                                    Type = "Deposit",
                                     Date = "28/04/2022",
                                     Hour = "12:00",
                                 },
                                 new Transaction6796()
                                 {
                                     Id = Guid.NewGuid().ToString(),
-                                    Value = 10,
+                                    Value = 50,
                                     Type = "Deposit",
                                     Date = "28/04/2022",
                                     Hour = "12:02",
@@ -170,17 +164,22 @@ namespace Banking6796.ViewModels6796
                                 new Transaction6796()
                                 {
                                     Id = Guid.NewGuid().ToString(),
-                                    Value = 10,
-                                    Type = "Deposit",
+                                    Value = 1,
+                                    Type = "Withdraw",
                                     Date = "28/04/2022",
                                     Hour = "12:11",
                                 }
                             }
                         }
                     }
-                };
-                await Application.Current.MainPage.DisplayAlert("Done", "Registred correctly", "Ok");
-                Application.Current.MainPage = new NavigationPage(new Views6796.MainPage6796(user));
+                    };
+                    await Application.Current.MainPage.DisplayAlert("Done", "Registred correctly", "Ok");
+                    Application.Current.MainPage = new NavigationPage(new Views6796.MainPage6796(user));
+                }
+                else
+                {
+                    await Application.Current.MainPage.DisplayAlert("Error", "The phone must have between 8-10 digits", "Ok");
+                }
             }
             else
             {

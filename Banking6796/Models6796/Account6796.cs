@@ -9,7 +9,7 @@ namespace Banking6796.Models6796
     {
         public string Id { get; set; }
         public string Name { get; set; }
-        public int Number { get; set; }
+        public long Number { get; set; }
         public int Balance { get; set; }
         public ObservableCollection<Transaction6796> Transactions { get; set; }
 

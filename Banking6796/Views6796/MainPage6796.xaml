@@ -58,9 +58,8 @@
                                         <Label Grid.Row="0" Grid.Column="2" VerticalOptions="Center" HorizontalOptions="End">
                                             <Label.FormattedText>
                                                 <FormattedString>
-                                                    <Span Text="Balance: " TextColor="DimGray"/>
-                                                    <Span Text="$" TextColor="#63d1b4"/>
-                                                    <Span Text="{Binding Balance}" TextColor="#63d1b4"/>
+                                                    <Span Text="Number: " TextColor="DimGray"/>
+                                                    <Span Text="{Binding Number}" TextColor="RoyalBlue"/>
                                                 </FormattedString>
                                             </Label.FormattedText>
                                         </Label>

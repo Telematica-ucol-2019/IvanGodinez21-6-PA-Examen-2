@@ -37,11 +37,11 @@
                     <StackLayout Grid.Row="1" Margin="10">
                         <Label TextColor="DimGray">Name</Label>
                         <Frame BackgroundColor="White">
-                            <Label Text="{Binding Account.Name}" TextColor="DimGray"></Label>
+                            <Label Text="{Binding Account.Name}" TextColor="RoyalBlue"></Label>
                         </Frame>
                         <Label TextColor="DimGray">Number</Label>
                         <Frame BackgroundColor="White">
-                            <Label Text="{Binding Account.Number}" TextColor="DimGray"></Label>
+                            <Label Text="{Binding Account.Number}" TextColor="RoyalBlue"></Label>
                         </Frame>
                         <Label TextColor="DimGray">Balance</Label>
                         <Frame BackgroundColor="White">
@@ -117,18 +117,11 @@
             <Grid Grid.Row="2" BackgroundColor="RoyalBlue">
                 <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Orientation="Horizontal">
                     <Button 
-                        Text="💰⏫"
+                        Text="💸"
                         BackgroundColor="GhostWhite"
                         FontSize="Large"
                         CornerRadius="10"
-                        Command="{Binding cmdBtnDeposit}"
-                        CommandParameter="{Binding Account}"/>
-                    <Button 
-                        Text="💰⏬"
-                        BackgroundColor="GhostWhite"
-                        FontSize="Large"
-                        CornerRadius="10"
-                        Command="{Binding cmdBtnWithdraw}"
+                        Command="{Binding cmdBtnTransaction}"
                         CommandParameter="{Binding Account}"/>
                     <Button 
                         Text="🗑️"
