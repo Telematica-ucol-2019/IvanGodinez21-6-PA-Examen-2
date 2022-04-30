@@ -45,8 +45,9 @@
                     </Entry>
                     <Label Text="Accion" TextColor="DimGray"/>
                     <Picker 
-                        Title="Choose"
+                        Title="Choose..."
                         TitleColor="DimGray"
+                        TextColor="DimGray"
                         BackgroundColor="White"
                         SelectedIndex="{Binding pckTransactionAction}"
                         >

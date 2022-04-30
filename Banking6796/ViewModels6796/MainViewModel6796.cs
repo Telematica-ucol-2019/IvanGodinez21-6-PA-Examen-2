@@ -347,27 +347,24 @@ namespace Banking6796.ViewModels6796
         #region Methods
         private void transactionAmountValidate()
         {
-            if (amount.Length > 0)
+            if (inpTransactionAmount.Length > 0)
             {
-                if (amount.Length <= 10)
+                if (inpTransactionAmount.Length <= 10)
                 {
-                    string lastCharacter = amount[amount.Length - 1].ToString();
+                    string lastCharacter = inpTransactionAmount[inpTransactionAmount.Length - 1].ToString();
                     if (!Regex.IsMatch(lastCharacter, @"^[0-9]*$"))
                     {
-                        amount = amount.Substring(0, amount.Length - 1);
+                        inpTransactionAmount = inpTransactionAmount.Substring(0, inpTransactionAmount.Length - 1);
                     }
                 }
                 else
                 {
-                    amount = amount.Substring(0, 10);
-                    inpTransactionAmount = amount.Substring(0, 10);
+                    inpTransactionAmount = inpTransactionAmount.Substring(0, inpTransactionAmount.Length - 1);
                 }
             }
         }
         private void transactionActionValidate()
         {
-            Console.WriteLine(action);
-            Console.WriteLine("OP2");
         }
         async private void transactionContinue(Account6796 _account)
         {
@@ -375,9 +372,9 @@ namespace Banking6796.ViewModels6796
             {
                 if (Convert.ToBoolean(Convert.ToInt32(action)) == false)
                 {
-                    if (Convert.ToInt32(amount) > 0)
+                    if (Convert.ToInt64(amount) > 0)
                     {
-                        int withDraw = Account.Balance - Convert.ToInt32(amount);
+                        long withDraw = Account.Balance - Convert.ToInt64(amount);
                         if (withDraw >= 0)
                         {
                             Account.Balance = withDraw;
@@ -385,7 +382,7 @@ namespace Banking6796.ViewModels6796
                                 new Transaction6796()
                                 {
                                     Id = Guid.NewGuid().ToString(),
-                                    Value = Convert.ToInt32(amount),
+                                    Value = Convert.ToInt64(amount),
                                     Type = Convert.ToInt32(action) == 0 ? "Withdraw" : "Deposit",
                                     Date = DateTime.Today.ToString("d"),
                                     Hour = DateTime.Now.ToString("HH:mm")
@@ -407,14 +404,14 @@ namespace Banking6796.ViewModels6796
                 }
                 else
                 {
-                    if (Convert.ToInt32(amount) > 0)
+                    if (Convert.ToInt64(amount) > 0)
                     {
-                        Account.Balance += Convert.ToInt32(amount);
+                        Account.Balance += Convert.ToInt64(amount);
                         Account.Transactions.Add(
                             new Transaction6796()
                             {
                                 Id = Guid.NewGuid().ToString(),
-                                Value = Convert.ToInt32(amount),
+                                Value = Convert.ToInt64(amount),
                                 Type = Convert.ToInt32(action) == 0 ? "Withdraw" : "Deposit",
                                 Date = DateTime.Today.ToString("d"),
                                 Hour = DateTime.Now.ToString("HH:mm")
